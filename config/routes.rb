@@ -16,5 +16,5 @@ Rails.application.routes.draw do
   get '/todos', to: 'todos#index'
 
   # Resources
-  resources :todos, only: [:index, :create]
+  resources :todos, only: [:index, :create, :destroy]
 end
