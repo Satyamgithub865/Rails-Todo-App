@@ -1,0 +1,20 @@
+<h1 class="text-2xl text-center">Todo List</h1>
+
+<%= form_with(model: Todo.new, class: "my-10") do |form| %>
+  <div class="my-3">
+    <%= form.label :description %>
+    <%= form.text_field :description, placeholder: "new todo", class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-2/4" %>
+  </div>
+
+  <div class="inline">
+    <%= form.submit class: "rounded-lg py-3 px-5 bg-blue-600 text-white inline-block font-medium cursor-pointer" %>
+  </div>
+<% end %>
+
+<div class="my-4 flex-col border rounded-md" >
+    <% @todos.each do |todo| %>
+        <div class="p-4 border-b">
+            <%= todo.description %>
+        </div>
+    <% end %>
+</div>
