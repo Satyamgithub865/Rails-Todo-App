@@ -15,4 +15,16 @@ class TodosController < ApplicationController
           redirect_to todos_path  
         end
     end
+
+    def update
+        @todo = Todo.find(params[:id])
+        if @todo.update(description: params[:todo][:description])
+          redirect_to todos_path, notice: "Todo updated successfully"
+        else
+          redirect_to todos_path, alert: "Failed to update todo"
+        end
+    end
+
+    def edit
+    end
 end

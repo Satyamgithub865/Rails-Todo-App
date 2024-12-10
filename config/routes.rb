@@ -13,8 +13,7 @@ Rails.application.routes.draw do
 
   # Routes
   root "home#index"
-  get '/todos', to: 'todos#index'
 
   # Resources
-  resources :todos, only: [:index, :create, :destroy]
+  resources :todos, only: [:index, :create, :destroy, :update]
 end
