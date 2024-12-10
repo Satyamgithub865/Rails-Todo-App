@@ -18,7 +18,7 @@ class TodosController < ApplicationController
 
     def update
         @todo = Todo.find(params[:id])
-        if @todo.update(description: params[:todo][:description])
+        if @todo.update(description: params[:todo][:description], status: params[:todo][:status])
           redirect_to todos_path, notice: "Todo updated successfully"
         else
           redirect_to todos_path, alert: "Failed to update todo"
