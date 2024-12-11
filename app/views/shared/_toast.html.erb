@@ -1,0 +1,11 @@
+<% if flash[:alert] %>
+  <div id="toast-top-right" class="fixed flex items-center w-full max-w-xs p-4 space-x-4 text-white divide-x rtl:divide-x-reverse divide-gray-200 rounded-lg shadow top-5 right-5 dark:text-white dark:divide-gray-700 dark:bg-red-400" role="alert" data-controller="toast">
+    <div class="text-sm font-normal"><%= flash[:alert] %></div>
+  </div>
+<% end %>
+
+<% if flash[:notice] %>
+  <div id="toast-top-right" class="fixed flex items-center w-full max-w-xs p-4 space-x-4 text-white divide-x rtl:divide-x-reverse divide-gray-200 rounded-lg shadow top-5 right-5 dark:text-white dark:divide-gray-700 dark:bg-green-400" role="alert" data-controller="toast">
+    <div class="text-sm font-normal"><%= flash[:notice] %></div>
+  </div>
+<% end %>

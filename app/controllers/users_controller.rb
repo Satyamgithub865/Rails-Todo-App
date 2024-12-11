@@ -8,10 +8,10 @@ class UsersController < ApplicationController
 
     if @user.save
       flash[:notice] = "User created successfully"
-      redirect_to root_path
+      redirect_to login_index_path
     else
-      flash[:alert] = "User not created"
-      render :new, status: :unprocessable_entity
+      flash.now[:alert] = "User not created"
+      render :index, status: :unprocessable_entity
     end
   end
 

@@ -1,7 +1,4 @@
 class LoginController < ApplicationController
-  def index
-  end
-
   def new
     @user = User.new
   end
@@ -13,8 +10,8 @@ class LoginController < ApplicationController
       session[:user_id] = @user.id
       redirect_to root_path
     else
-      flash[:alert] = "Login failed"
-      redirect_to new_user_session_path
+      flash.now[:alert] = "Oops! Incorrect email or password."
+      render :index, status: :unprocessable_entity
     end
   end
 
