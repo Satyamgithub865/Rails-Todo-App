@@ -1,51 +1,15 @@
 <h1 class="text-3xl font-bold text-center text-gray-800 my-6">Todo List</h1>
 
-<%= form_with(model: Todo.new, class: "my-10 bg-white p-6 rounded-lg shadow-lg max-w-xl mx-auto") do |form| %>
-  <div class="my-4">
-    <%= form.label :description, "Add a new task", class: "block text-lg font-medium text-gray-700" %>
-    <%= form.text_field :description, placeholder: "Enter your todo here...", class: "w-full mt-2 px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-transparent" %>
-  </div>
-
-  <div class="flex justify-between">
-    <%= link_to "Back to home", root_path, class: "py-2 px-4 bg-gray-300 text-white font-semibold rounded-md shadow-md hover:bg-gray-400 transition-all duration-200 ease-in-out" %>
-    <%= form.submit "Add Todo", class: "py-2 px-4 bg-blue-600 text-white font-semibold rounded-md shadow-md hover:bg-blue-700 transition-all duration-200 ease-in-out" %>
-  </div>
-<% end %>
+<%= render partial: "todos/partials/todo_create_form" %>
 
 <div class="my-8 bg-gray-50 p-6 rounded-lg shadow-lg max-w-xl mx-auto">
   <% if @todos.any? %>
     <% @todos.each do |todo| %>
       <div class="p-4 flex-col items-center border-b last:border-b-0 bg-white hover:bg-gray-100 rounded-md transition-all duration-200 ease-in-out shadow-sm">
         <% if params[:edit_id].to_i == todo.id %>
-          <%= form_with(model: todo, url: todo_path(todo), method: :patch, class: "w-full") do |form| %>
-            <div class="flex justify-between items-center space-x-4">
-              <%= form.text_field :description, value: todo.description, class: "w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-transparent" %>
-              <div class="flex space-x-2">
-                <%= form.submit "Save", class: "py-1 px-3 bg-green-600 text-white font-semibold rounded-md shadow-md hover:bg-green-700 transition-all duration-200 ease-in-out" %>
-                <%= link_to "Discard", todos_path, class: "py-1 px-3 bg-gray-600 text-white font-semibold rounded-md shadow-md hover:bg-gray-700 transition-all duration-200 ease-in-out" %>
-              </div>
-            </div>
-            <div class="flex space-x-2 items-center mt-2">
-              <%= form.radio_button :status, "completed", class: "", data: { status: "completed" } %>
-              <label>Completed</label>
-
-              <%= form.radio_button :status, "pending", class: "", data: { status: "pending" } %>
-              <label>Pending</label>
-            </div>
-          <% end %>
+          <%= render partial: "todos/partials/todo_edit_form", locals: { todo: todo } %>
         <% else %>
-          <div class="flex justify-between">
-            <p class="text-gray-800 font-medium"><%= todo.description %></p>
-            <div class="flex space-x-2">
-              <%= link_to "Edit", todos_path(edit_id: todo.id), class: "py-1 px-3 bg-blue-600 text-white font-semibold rounded-md shadow-md hover:bg-blue-700 transition-all duration-200 ease-in-out" %>
-              <%= button_to "Delete", todo_path(todo), method: :delete, class: "py-1 px-3 bg-red-600 text-white font-semibold rounded-md shadow-md hover:bg-red-700 transition-all duration-200 ease-in-out" %>
-            </div>
-          </div>
-          <% if !todo.status.nil? %>
-            <p class="<%= todo.status == 'completed' ? 'bg-green-100' : 'bg-yellow-200' %> text-gray-400 font-medium px-4 py-1 rounded-[10px] inline-block">
-              <%= todo.status %>
-            </p>
-          <% end %>
+          <%= render partial: "todos/partials/todo_item", locals: { todo: todo } %>
         <% end %>
       </div>
     <% end %>
