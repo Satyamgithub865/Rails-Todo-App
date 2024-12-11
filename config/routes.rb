@@ -16,4 +16,6 @@ Rails.application.routes.draw do
 
   # Resources
   resources :todos, only: [:index, :create, :destroy, :update]
+  resources :users, only: [:index, :create]
+  resources :login, only: [:index, :new, :create, :destroy]
 end
